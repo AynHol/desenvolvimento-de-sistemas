@@ -1,12 +1,11 @@
-import { differenceInDays } from 'date-fns';
-import leia from 'readline-sync';
+import read from 'readline-sync';
 
-export default function exercicio03() {
-    let dataNasc = leia.question("INFORME DATA NASCIMENTO.. ");
-    let dataFormat = new Date(dataNasc);
-    let dataAtual = new Date();
+export default function exercicio02(){
+    let anos = read.questionInt("INFORME OS ANOS: ")
+    let meses = read.questionInt("INFORME OS MESES: ")
+    let dias = read.questionInt("INFORME OS DIAS: ")
 
-    const diasVividos = differenceInDays(dataAtual, dataFormat);
+    let diasTotais = (anos * 365) + (meses * 30) + dias;
 
-    console.log(`Você viveu ${diasVividos} dias`)
+    console.log(diasTotais);
 }

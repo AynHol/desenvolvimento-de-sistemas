@@ -1,11 +1,9 @@
-import leia from 'readline-sync';
+import read from "readline-sync";
 
-export default function exercicio02(){
-    let anos = leia.questionInt("INFORME OS ANOS: ")
-    let meses = leia.questionInt("INFORME OS MESES: ")
-    let dias = leia.questionInt("INFORME OS DIAS: ")
+export default function exercicio03() {
+    var altura = read.questionInt("Informe a altura do retangulo: ");
+    var largura = read.questionInt("Informe a largura do retangulo: ");
 
-    let diasTotais = (anos * 365) + (meses * 30) + dias;
-
-    console.log(diasTotais);
+    var area = altura * largura;
+    console.log(`A area do retangulo é ${area}`);
 }

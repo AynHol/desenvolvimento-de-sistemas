@@ -1,7 +1,7 @@
-import leia from 'readline-sync';
+import read from 'readline-sync';
 
 export default function exercicio01() {
-    let numero = leia.questionInt("DIGITE UM NUMERO: ");
+    let numero = read.questionInt("DIGITE UM NUMERO: ");
     console.log(`O NUMERO DIGITADO: ${numero}`);
     
     let antecessor = --numero;
