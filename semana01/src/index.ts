@@ -40,6 +40,16 @@ import exercicio38 from "./exercicio38";
 import exercicio39 from "./exercicio39";
 import exercicio40 from "./exercicio40";
 import exercicio41 from "./exercicio41";
+import exercicio42 from "./exercicio42";
+import exercicio43 from "./exercicio43";
+import exercicio44 from "./exercicio44";
+import exercicio45 from "./exercicio45";
+import exercicio46 from "./exercicio46";
+import exercicio47 from "./exercicio47";
+import exercicio48 from "./POO/48/exercicio48";
+import exercicio49 from "./POO/49/exercicio49";
+import exercicio50 from "./POO/50/exercicio50";
+import exercicio51 from "./POO/51/exercicio51";
 
 var pagina = leia.keyInSelect(["Pagina 01", "Pagina 02"]) + 1;
 
@@ -232,34 +242,34 @@ switch (pagina) {
                 exercicio41();
                 break;
             case 7:
-                // exercicio42();
+                exercicio42();
                 break;
             case 8:
-                // exercicio43();
+                exercicio43();
                 break;
             case 9:
-                // exercicio44();
+                exercicio44();
                 break;
             case 10:
-                // exercicio45();
+                exercicio45();
                 break;
             case 11:
-                // exercicio46();
+                exercicio46();
                 break;
             case 12:
-                // exercicio47();
+                exercicio47();
                 break;
             case 13:
-                // exercicio48();
+                exercicio48();
                 break;
             case 14:
-                // exercicio49();
+                exercicio49();
                 break;
             case 15:
-                // exercicio50();
+                exercicio50();
                 break;
             case 16:
-                // exercicio51();
+                exercicio51();
                 break;
         }
         break;
