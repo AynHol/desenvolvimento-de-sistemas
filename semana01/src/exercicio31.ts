@@ -1,22 +1,18 @@
 import read from "readline-sync";
 
-//!!!!!!!!!!!!!!!!!!!NÃO TERMINADO!!!!!!!!!!!!!!!!!!!
-
 export default function exercicio31() {
-    let fdigito = 1;
+    let fdigito = 0;
     let sdigito = 1;
     let tdigito;
+    let resultado = "0 - 1";
     var num = read.questionInt("Digite um numero: ");
 
-    // for (var i = 0; i < num; i++) {
-    //     tdigito = fdigito + sdigito;
-    //     console.log(tdigito);
-    //     i++;
-    //     fdigito = sdigito + tdigito;
-    //     console.log(fdigito);
-    //     i++;
-    //     sdigito = tdigito + fdigito;
-    //     console.log(sdigito);
-    //     i++;
-    // }
+    for (var i = 2; i < num; i++) {
+        tdigito = fdigito + sdigito;
+        fdigito = sdigito;
+        sdigito = tdigito;
+        resultado = resultado + " - " + tdigito;
+    }
+
+    console.log(resultado);
 }
