@@ -5,9 +5,7 @@ async function loadProfile() {
         return;
     }
 
-    const response = await fetch(`https://api.github.com/users/${username}`, {
-        method: "GET",
-    });
+    const response = await fetch(`https://api.github.com/users/${username}`);
     const user = await response.json();
 
     const profileElement = document.createElement("div");
