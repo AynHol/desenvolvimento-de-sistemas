@@ -1,0 +1,40 @@
+body {
+    background-color: #f4f4f4;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 60%;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.container input {
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.container button {
+    padding: 5px;
+    border: none;
+    color: #fff;
+    background-color: #33b249;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.container button:hover {
+    background-color: #278337;
+}
+
+.chart {
+    width: 80%;
+    background-color: #fff;
+    max-width: 700px;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
