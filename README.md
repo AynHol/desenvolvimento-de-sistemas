@@ -6,3 +6,5 @@
 - Semana 03 - Continuação da recapitulação (incluso na 01).
 - Semana 04 - Site com API do Github para procurar account names,
 - Semana 04 - Site com API do IBGE para mostrar frequência de nomes por década.
+- Semana 05 - Nada.
+- Semana 06 - React.
