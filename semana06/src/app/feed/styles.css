@@ -5,13 +5,14 @@
     gap: 32px;
     padding: 32px 16px;
     margin: 0 auto;
+    background-color: #111113;
 }
 
 .sidebar {
     background-color: #202024;
-    height: 200px;
     border-radius: 8px;
     overflow: hidden;
+    height: fit-content;
 }
 
 .sidebar .cover {
@@ -39,6 +40,36 @@
     line-height: 1.6;
 }
 
-.main {
-    background-color: blue;
+.sidebar footer {
+    border-top: 1px solid #323238;
+    margin-top: 24px;
+    padding: 24px 32px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar footer .button-edit-profile {
+    background-color: transparent;
+    color: #00875f;
+    border: 1px solid #00875f;
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sidebar footer .button-edit-profile:hover {
+    color: #fff;
+    background-color: #00875f;
+    cursor: pointer;
+}
+
+.sidebar footer .button-edit-profile-icon {
+    height: 16px;
+    width: 16px;
 }

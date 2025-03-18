@@ -1,0 +1,81 @@
+.post {
+    background-color: #202024;
+    border-radius: 8px;
+    padding: 40px;
+}
+
+.post+.post {
+    margin-top: 32px;
+}
+
+.post header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.author {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-info strong {
+    color: #e1e1e6;
+    line-height: 1.6;
+}
+
+.author-info span,
+header time {
+    color: #8d8d99;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.content {
+    color: #c4c4cc;
+    line-height: 1.6;
+    margin-top: 24px;
+}
+
+.content-form {
+    border-top: 1px solid #323238;
+    margin-top: 24px;
+    padding: 24px 0px;
+}
+
+.content-form strong {
+    color: #e1e1e6;
+    line-height: 1.6;
+}
+
+.content-form textarea {
+    border-radius: 8px;
+    background-color: #121214;
+    border: 1px solid #00875f;
+    padding: 16px;
+    margin: 16px 0;
+    resize: none;
+    color: #c4c4c4;
+    outline: none;
+}
+
+.content-form footer button {
+    background-color: #00875f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-form footer button:hover {
+    background-color: #00875f
+}
