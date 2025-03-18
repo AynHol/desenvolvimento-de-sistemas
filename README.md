@@ -8,3 +8,4 @@
 - Semana 04 - Site com API do IBGE para mostrar frequência de nomes por década.
 - Semana 05 - Nada.
 - Semana 06 - React.
+- Semana 07 - Continuação React.
