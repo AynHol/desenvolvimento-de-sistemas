@@ -1,5 +1,9 @@
+"use client";
+import { FormEvent, useState } from "react";
 import Avatar from "../Avatar";
 import "./styles.css";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 type Author = {
     name: string;
@@ -9,7 +13,7 @@ type Author = {
 
 type Comment = {
     message: string;
-    publisedAt: Date;
+    publishedAt: Date;
     like: number;
     author: Author;
 };
@@ -22,38 +26,41 @@ type PostProps = {
     };
 };
 
-export default function Post(props: PostProps) {
+export default function Post({ post }: PostProps) {
+    const [newComment, setNewComment] = useState<string>("");
+
+    function handleCreateNewComment(event: FormEvent) {
+        event.preventDefault();
+        alert(newComment);
+    }
+
+    const dateFormat = formatDistanceToNow(post.publishedAt, {
+        locale: ptBR,
+        addSuffix: true,
+    });
+
     return (
         <article className="post">
             <header>
                 <div className="author">
-                    <Avatar src={"https://github.com/aynhol.png"} hasBorder />
+                    <Avatar src={post.author.avatarUrl} hasBorder />
                     <div className="author-info">
-                        <strong>Wesley Antunes</strong>
-                        <span>System Development Student</span>
+                        <strong>{post.author.name}</strong>
+                        <span>{post.author.role}</span>
                     </div>
                 </div>
-                <time>Públicado há 2 horas</time>
+                <time>{dateFormat}</time>
             </header>
             <div className="content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse non nisi enim. Nunc tincidunt, turpis et auctor
-                    malesuada, orci diam rutrum quam, quis finibus ipsum eros
-                    sed nulla. Donec et commodo purus, a efficitur velit.
-                    Pellentesque id neque viverra, hendrerit magna id, feugiat
-                    quam. Pellentesque semper vestibulum leo sit amet maximus.
-                    Fusce eu magna nulla. Fusce dictum nulla vitae elit
-                    sollicitudin dapibus. Etiam laoreet accumsan rutrum. Aliquam
-                    euismod est id elementum rhoncus. Cras id enim eget mi
-                    scelerisque interdum nec ut erat. Mauris sagittis
-                    condimentum leo, a rutrum nunc facilisis sed. Praesent
-                    facilisis lacinia est, in aliquam mi.
-                </p>
+                <p>{post.content}</p>
             </div>
-            <form className="content-form">
+            <form className="content-form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe um comentário</strong>
-                <textarea placeholder="Deixe um comentário" />
+                <textarea
+                    placeholder="Deixe um comentário"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                />
                 <footer>
                     <button>Publicar</button>
                 </footer>
