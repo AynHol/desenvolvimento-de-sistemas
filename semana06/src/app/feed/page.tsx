@@ -8,6 +8,8 @@ import { PiPencilLine } from "react-icons/pi";
 import Post from "@/components/Post";
 import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import TextareaCustom from "@/components/TextareaCustom";
+import ButtonCustom from "@/components/ButtonCustom";
 
 type Author = {
     name: string;
@@ -32,7 +34,11 @@ export default function Feed() {
 
     async function loadPost() {
         const response = await axios.get("http://localhost:5500/posts");
-        setPosts(response.data);
+        const postSort = response.data.sort((a: any, b: any) => (
+            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        ))
+
+        setPosts(postSort)
     }
 
     async function handleCreatePost(event: FormEvent) {
@@ -72,13 +78,13 @@ export default function Feed() {
                     </div>
                 </aside>
                 <main className="main">
-                    <form onSubmit={handleCreatePost}>
-                        <textarea
-                            placeholder="O que você está pensando?"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
+                    <form onSubmit={handleCreatePost} className="form-post">
+                        <TextareaCustom
+                            message={content}
+                            setMessage={setContent}
+                            title="O que você está pensando???"
                         />
-                        <button type="submit">Publicar</button>
+                        <ButtonCustom />
                     </form>
 
                     {posts.map((item) => (

@@ -4,6 +4,9 @@ import Avatar from "../Avatar";
 import "./styles.css";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import TextareaCustom from "../TextareaCustom";
+import ButtonCustom from "../ButtonCustom";
+import axios from "axios";
 
 type Author = {
     name: string;
@@ -11,15 +14,9 @@ type Author = {
     avatarUrl: string;
 };
 
-type Comment = {
-    message: string;
-    publishedAt: Date;
-    like: number;
-    author: Author;
-};
-
 type PostProps = {
     post: {
+        id: string;
         author: Author;
         publishedAt: Date;
         content: string;
@@ -29,9 +26,23 @@ type PostProps = {
 export default function Post({ post }: PostProps) {
     const [newComment, setNewComment] = useState<string>("");
 
-    function handleCreateNewComment(event: FormEvent) {
+    async function handleCreateNewComment(event: FormEvent) {
         event.preventDefault();
         alert(newComment);
+
+        const comment = {
+            comment: newComment,
+            publishedAt: new Date().toISOString(),
+            author: {
+                name: "Wesley Antunes",
+                role: "System Development Student",
+                avatarUrl: "https://github.com/aynhol.png",
+            },
+        };
+
+        await axios.patch(`http://localhost:5500/posts/${post.id}`, {
+            "comments": comment,
+        });
     }
 
     const dateFormat = formatDistanceToNow(post.publishedAt, {
@@ -54,15 +65,15 @@ export default function Post({ post }: PostProps) {
             <div className="content">
                 <p>{post.content}</p>
             </div>
-            <form className="content-form" onSubmit={handleCreateNewComment}>
+            <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe um comentário</strong>
-                <textarea
-                    placeholder="Deixe um comentário"
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
+                <TextareaCustom
+                    message={newComment}
+                    setMessage={setNewComment}
+                    title="Deixe um comentário..."
                 />
                 <footer>
-                    <button>Publicar</button>
+                    <ButtonCustom />
                 </footer>
             </form>
         </article>
