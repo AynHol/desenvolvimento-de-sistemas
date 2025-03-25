@@ -84,3 +84,8 @@ header time {
     visibility: visible;
     max-height: none;
 }
+
+.comment p {
+    color: #e1e1e6;
+    line-height: 1.4;
+}

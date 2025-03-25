@@ -17,11 +17,19 @@ type Author = {
     avatarUrl: string;
 };
 
+type Comment = {
+    id: string;
+    author: Author;
+    comment: string;
+    publishedAt: Date;
+};
+
 type Post = {
-    id: number;
+    id: string;
     author: Author;
     publishedAt: Date;
     content: string;
+    comments: Comment[];
 };
 
 export default function Feed() {
@@ -34,17 +42,21 @@ export default function Feed() {
 
     async function loadPost() {
         const response = await axios.get("http://localhost:5500/posts");
-        const postSort = response.data.sort((a: any, b: any) => (
-            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-        ))
 
-        setPosts(postSort)
+        // Ordena os post por +novo => +velho
+        const postSort = response.data.sort(
+            (a: any, b: any) =>
+                new Date(b.publishedAt).getTime() -
+                new Date(a.publishedAt).getTime()
+        );
+
+        setPosts(postSort);
     }
 
     async function handleCreatePost(event: FormEvent) {
         event.preventDefault();
         const post = {
-            id: posts.length + 1,
+            id: String(posts.length + 1),
             content: content,
             publishedAt: new Date().toISOString(),
             author: {
@@ -87,9 +99,11 @@ export default function Feed() {
                         <ButtonCustom />
                     </form>
 
+                    {/* procura os posts */}
                     {posts.map((item) => (
-                        <Post post={item} key={item.id} />
-                    ))}
+                        <Post post={item} key={item.id} setPost={setPosts} />
+                    ))} a
+                    
                 </main>
             </div>
         </div>
