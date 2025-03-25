@@ -7,6 +7,7 @@ import { ptBR } from "date-fns/locale";
 import TextareaCustom from "../TextareaCustom";
 import ButtonCustom from "../ButtonCustom";
 import axios from "axios";
+import { PiHandsClappingDuotone } from "react-icons/pi";
 
 type Author = {
     name: string;
@@ -19,6 +20,7 @@ type Comment = {
     author: Author;
     comment: string;
     publishedAt: Date;
+    applauses: number;
 };
 
 type Post = {
@@ -53,8 +55,10 @@ export default function Post({ post, setPost }: PostProps) {
 
         // Cria novo comentário
         const comment = {
+            id: String(post.comments.length + 1),
             comment: newComment,
             publishedAt: new Date().toISOString(),
+            Applauses: 0,
             author: {
                 name: "Wesley Antunes",
                 role: "System Development Student",
@@ -106,11 +110,44 @@ export default function Post({ post, setPost }: PostProps) {
                     <ButtonCustom />
                 </footer>
             </form>
-            <div className="comment">
-            {/* mostra os comentários (&& = só faz se o 1 for true)*/}
-            {post.comments?.length && post.comments.map(comment => (
-                <p key={comment.comment}>{comment.comment}</p>
-            ))}
+            <div className="comments">
+                <ul>
+                    {/* mostra os comentários (&& = só faz se o 1 for true)*/}
+                    {post.comments?.length &&
+                        post.comments.map((comment) => (
+                            <div key={comment.comment}>
+                                <div className="comment-total">
+                                    <Avatar src={comment.author.avatarUrl} />
+                                    <div className="outra-div" >
+                                        <div className="comment-area">
+                                            <div className="comment-profile">
+                                                <strong>
+                                                    {comment.author.name}
+                                                </strong>
+                                                <time>
+                                                    {formatDistanceToNow(
+                                                        comment.publishedAt,
+                                                        {
+                                                            locale: ptBR,
+                                                            addSuffix: true,
+                                                            //solução temp
+                                                        }
+                                                    )}
+                                                </time>
+                                            </div>
+                                            <div className="comment">
+                                                {comment.comment}
+                                            </div>
+                                        </div>
+                                        <button type="submit">
+                                            <PiHandsClappingDuotone className="aplaudir-icon" />
+                                            Aplaudir • {comment.applauses}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                </ul>
             </div>
         </article>
     );

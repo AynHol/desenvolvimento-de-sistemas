@@ -22,6 +22,7 @@ type Comment = {
     author: Author;
     comment: string;
     publishedAt: Date;
+    applauses: number;
 };
 
 type Post = {
@@ -98,12 +99,11 @@ export default function Feed() {
                         />
                         <ButtonCustom />
                     </form>
-
                     {/* procura os posts */}
                     {posts.map((item) => (
                         <Post post={item} key={item.id} setPost={setPosts} />
-                    ))} a
-                    
+                    ))}{" "}
+                    a
                 </main>
             </div>
         </div>

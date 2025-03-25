@@ -72,6 +72,11 @@
     cursor: pointer;
 }
 
+.sidebar footer .button-edit-profile-icon {
+    height: 16px;
+    width: 16px;
+}
+
 .form-post {
     width: 100%;
     background-color: #202024;

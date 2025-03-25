@@ -69,6 +69,7 @@ header time {
     outline: none;
     width: 100%;
     height: 80px;
+    margin-bottom: 8px;
 }
 
 .form textarea:focus-within {
@@ -83,9 +84,72 @@ header time {
 .form:focus-within footer {
     visibility: visible;
     max-height: none;
+    margin-top: -8px;
 }
 
-.comment p {
+.comment-total {
+    display: flex;
+    margin-top: 24px;
+    gap: 16px;
+}
+
+.outra-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment-area {
+    background-color: #29292E;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment-profile {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+.comment-profile strong {
     color: #e1e1e6;
-    line-height: 1.4;
+}
+
+.comment-profile time {
+    color: #8d8d99;
+    font-size: 14px;
+}
+
+.comment {
+    color: #c4c4cc;
+}
+
+.outra-div button {
+    border: none;
+    background-color: transparent;
+    font-size: 16;
+    cursor: pointer;
+    color: #8d8d99;
+    font-weight: bold;
+}
+
+.outra-div button:hover {
+    color: #00875f;
+}
+
+.aplaudir-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.outra-div button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }
