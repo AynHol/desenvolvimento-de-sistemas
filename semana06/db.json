@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "content": "a",
+      "content": "Teste",
       "publishedAt": "2025-03-19T01:01:29.259Z",
       "author": {
         "name": "Wesley Antunes",
@@ -41,10 +41,10 @@
       },
       "comments": [
         {
-          "id": "1",
-          "comment": "e",
-          "publishedAt": "2025-03-24T23:13:01.602Z",
-          "applauses": 2,
+          "id": "ecea41f6-4553-4c41-97b6-9d60430e2d86",
+          "comment": "Um pouco mais de testes",
+          "publishedAt": "2025-03-26T00:05:15.614Z",
+          "applauses": 0,
           "author": {
             "name": "Wesley Antunes",
             "role": "System Development Student",
@@ -52,21 +52,10 @@
           }
         },
         {
-          "id": "2",
-          "comment": "teste",
-          "publishedAt": "2025-03-24T23:15:02.865Z",
-          "applauses": 1,
-          "author": {
-            "name": "Wesley Antunes",
-            "role": "System Development Student",
-            "avatarUrl": "https://github.com/aynhol.png"
-          }
-        },
-        {
-          "id": "3",
-          "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci mauris, cours a fermentum eget, solicitudin eu quam. Ut mauris mauris, blandit a accumsan ac, vehicle vitae.",
-          "publishedAt": "2025-03-25T00:12:42.031Z",
-          "applauses": 6,
+          "id": "64466b69-c458-48d6-be6f-48fd001faef6",
+          "comment": "a",
+          "publishedAt": "2025-03-26T00:49:39.732Z",
+          "applauses": 0,
           "author": {
             "name": "Wesley Antunes",
             "role": "System Development Student",

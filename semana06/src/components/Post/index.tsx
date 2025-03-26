@@ -7,7 +7,8 @@ import { ptBR } from "date-fns/locale";
 import TextareaCustom from "../TextareaCustom";
 import ButtonCustom from "../ButtonCustom";
 import axios from "axios";
-import { PiHandsClappingDuotone } from "react-icons/pi";
+import Comment from "../Comment";
+import { v4 as uuid } from "uuid";
 
 type Author = {
     name: string;
@@ -40,14 +41,10 @@ export default function Post({ post, setPost }: PostProps) {
     const [newComment, setNewComment] = useState<string>("");
 
     async function loadPost() {
-        const response = await axios.get(
-            `http://localhost:5500/posts/${post.id}`
-        );
+        const response = await axios.get(`http://localhost:5500/posts/${post.id}`);
 
         // Atualiza posição especifica do estado
-        setPost((prev: Post[]) =>
-            prev.map((atual) => (atual.id == post.id ? response.data : atual))
-        );
+        setPost((prev: Post[]) => prev.map((atual) => (atual.id === post.id ? response.data : atual)));
     }
 
     async function handleCreateNewComment(event: FormEvent) {
@@ -55,10 +52,10 @@ export default function Post({ post, setPost }: PostProps) {
 
         // Cria novo comentário
         const comment = {
-            id: String(post.comments.length + 1),
+            id: uuid(),
             comment: newComment,
             publishedAt: new Date().toISOString(),
-            Applauses: 0,
+            applauses: 0,
             author: {
                 name: "Wesley Antunes",
                 role: "System Development Student",
@@ -67,15 +64,40 @@ export default function Post({ post, setPost }: PostProps) {
         };
 
         // Permite mais de 1 comentário por post
-        const comments = post.comments?.length
-            ? [...post.comments, comment]
-            : [comment];
+        const comments = post.comments?.length ? [...post.comments, comment] : [comment];
 
         await axios.patch(`http://localhost:5500/posts/${post.id}`, {
             comments: comments,
         });
 
+        loadPost();
         setNewComment("");
+    }
+
+    async function handleDeleteComment(event: MouseEvent, id: string) {
+        event.preventDefault();
+
+        //filtra os comentários com id's diferentes do esperado
+        const commentsFilter = post.comments.filter((comment) => comment.id !== id);
+
+        //passa os comentários filtrados para o backend deixando o não filtrado (deletando)
+        await axios.patch(`http://localhost:5500/posts/${post.id}`, {
+            comments: commentsFilter,
+        });
+        loadPost();
+    }
+
+    async function handleApplauseComment(event: MouseEvent, id: string) {
+        event.preventDefault();
+
+        //procura o comentário com o mesmo id, enviando a quatidade de applauses + 1; Ignora os comentários com id's diferentes
+        const commentsUpdated = post.comments.map((comment) => {
+            if (comment.id === id) {
+                return { ...comment, applauses: comment.applauses + 1 };
+            }
+            return comment;
+        });
+        loadPost();
     }
 
     // Formata a data para ("tanto tempo" atrás)
@@ -101,54 +123,21 @@ export default function Post({ post, setPost }: PostProps) {
             </div>
             <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe um comentário</strong>
-                <TextareaCustom
-                    message={newComment}
-                    setMessage={setNewComment}
-                    title="Deixe um comentário..."
-                />
+                <TextareaCustom message={newComment} setMessage={setNewComment} title="Deixe um comentário..." />
                 <footer>
                     <ButtonCustom />
                 </footer>
             </form>
-            <div className="comments">
-                <ul>
-                    {/* mostra os comentários (&& = só faz se o 1 for true)*/}
-                    {post.comments?.length &&
-                        post.comments.map((comment) => (
-                            <div key={comment.comment}>
-                                <div className="comment-total">
-                                    <Avatar src={comment.author.avatarUrl} />
-                                    <div className="outra-div" >
-                                        <div className="comment-area">
-                                            <div className="comment-profile">
-                                                <strong>
-                                                    {comment.author.name}
-                                                </strong>
-                                                <time>
-                                                    {formatDistanceToNow(
-                                                        comment.publishedAt,
-                                                        {
-                                                            locale: ptBR,
-                                                            addSuffix: true,
-                                                            //solução temp
-                                                        }
-                                                    )}
-                                                </time>
-                                            </div>
-                                            <div className="comment">
-                                                {comment.comment}
-                                            </div>
-                                        </div>
-                                        <button type="submit">
-                                            <PiHandsClappingDuotone className="aplaudir-icon" />
-                                            Aplaudir • {comment.applauses}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                </ul>
-            </div>
+            {/* mostra os comentários (&& = só faz se o 1 for true)*/}
+            {post.comments?.length &&
+                post.comments.map((item) => (
+                    <Comment
+                        key={item.id}
+                        comment={item}
+                        handleDeleteComment={handleDeleteComment}
+                        handleApplauseComment={handleApplauseComment}
+                    />
+                ))}
         </article>
     );
 }

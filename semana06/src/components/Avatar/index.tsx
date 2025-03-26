@@ -6,10 +6,5 @@ type AvatarProps = {
 };
 
 export default function Avatar({ src, hasBorder = false }: AvatarProps) {
-    return (
-        <img
-            src={src}
-            className={hasBorder ? "avatar" : "avatar-without-border"}
-        />
-    );
+    return <img src={src} className={hasBorder ? "avatar" : "avatar-without-border"} />;
 }

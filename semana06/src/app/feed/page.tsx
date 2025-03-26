@@ -46,9 +46,7 @@ export default function Feed() {
 
         // Ordena os post por +novo => +velho
         const postSort = response.data.sort(
-            (a: any, b: any) =>
-                new Date(b.publishedAt).getTime() -
-                new Date(a.publishedAt).getTime()
+            (a: any, b: any) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
         );
 
         setPosts(postSort);
@@ -84,26 +82,20 @@ export default function Feed() {
 
                         <footer>
                             <button className="button-edit-profile">
-                                <PiPencilLine className="button-edit-profile-icon" />{" "}
-                                Editar seu perfil
+                                <PiPencilLine className="button-edit-profile-icon" /> Editar seu perfil
                             </button>
                         </footer>
                     </div>
                 </aside>
                 <main className="main">
                     <form onSubmit={handleCreatePost} className="form-post">
-                        <TextareaCustom
-                            message={content}
-                            setMessage={setContent}
-                            title="O que você está pensando???"
-                        />
+                        <TextareaCustom message={content} setMessage={setContent} title="O que você está pensando???" />
                         <ButtonCustom />
                     </form>
                     {/* procura os posts */}
                     {posts.map((item) => (
                         <Post post={item} key={item.id} setPost={setPosts} />
-                    ))}{" "}
-                    a
+                    ))}
                 </main>
             </div>
         </div>
