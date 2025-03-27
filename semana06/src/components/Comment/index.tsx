@@ -1,4 +1,3 @@
-"use client";
 import Avatar from "../Avatar";
 import "./styles.css";
 import { RiDeleteBin6Line } from "react-icons/ri";

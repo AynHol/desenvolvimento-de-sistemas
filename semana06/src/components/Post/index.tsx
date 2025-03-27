@@ -41,10 +41,14 @@ export default function Post({ post, setPost }: PostProps) {
     const [newComment, setNewComment] = useState<string>("");
 
     async function loadPost() {
-        const response = await axios.get(`http://localhost:5500/posts/${post.id}`);
+        const response = await axios.get(
+            `http://localhost:5500/posts/${post.id}`
+        );
 
         // Atualiza posição especifica do estado
-        setPost((prev: Post[]) => prev.map((atual) => (atual.id === post.id ? response.data : atual)));
+        setPost((prev: Post[]) =>
+            prev.map((atual) => (atual.id === post.id ? response.data : atual))
+        );
     }
 
     async function handleCreateNewComment(event: FormEvent) {
@@ -64,7 +68,9 @@ export default function Post({ post, setPost }: PostProps) {
         };
 
         // Permite mais de 1 comentário por post
-        const comments = post.comments?.length ? [...post.comments, comment] : [comment];
+        const comments = post.comments?.length
+            ? [...post.comments, comment]
+            : [comment];
 
         await axios.patch(`http://localhost:5500/posts/${post.id}`, {
             comments: comments,
@@ -78,7 +84,9 @@ export default function Post({ post, setPost }: PostProps) {
         event.preventDefault();
 
         //filtra os comentários com id's diferentes do esperado
-        const commentsFilter = post.comments.filter((comment) => comment.id !== id);
+        const commentsFilter = post.comments.filter(
+            (comment) => comment.id !== id
+        );
 
         //passa os comentários filtrados para o backend deixando o não filtrado (deletando)
         await axios.patch(`http://localhost:5500/posts/${post.id}`, {
@@ -96,6 +104,11 @@ export default function Post({ post, setPost }: PostProps) {
                 return { ...comment, applauses: comment.applauses + 1 };
             }
             return comment;
+        });
+
+        //passa o comentário com o Applause para o backend
+        await axios.patch(`http://localhost:5500/posts/${post.id}`, {
+            comments: commentsUpdated,
         });
         loadPost();
     }
@@ -123,7 +136,11 @@ export default function Post({ post, setPost }: PostProps) {
             </div>
             <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe um comentário</strong>
-                <TextareaCustom message={newComment} setMessage={setNewComment} title="Deixe um comentário..." />
+                <TextareaCustom
+                    message={newComment}
+                    setMessage={setNewComment}
+                    title="Deixe um comentário..."
+                />
                 <footer>
                     <ButtonCustom />
                 </footer>
