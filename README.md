@@ -10,3 +10,5 @@
 - Semana 06 - React.
 - Semana 07 - Continuação React. (incluso na 06).
 - Semana 08 - Continuação React. (incluso na 06).
+- Semana 09 - Situação de Aprendizagem.
+- Semana 10 - Teste de sistemas
