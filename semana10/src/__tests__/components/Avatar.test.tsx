@@ -2,7 +2,7 @@ import Avatar from "@/components/Avatar";
 import { render, screen } from "@testing-library/react";
 
 describe("Componente Avatar", () => {
-    it("Deve renderizar o componente de avatar sem borda", () => {
+    it("Should render the avatar component without border", () => {
         render(<Avatar src="teste" />);
 
         const avatarElement = screen.getByTestId("avatar");
@@ -11,7 +11,7 @@ describe("Componente Avatar", () => {
         expect(avatarElement).toHaveClass("avatar-without-border");
     });
 
-    it("Deve renderizar o componente de avatar com borda", () => {
+    it("Should render the avatar component with border", () => {
         render(<Avatar src="teste" hasBorder />);
 
         const avatarElement = screen.getByTestId("avatar");
