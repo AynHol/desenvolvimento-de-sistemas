@@ -30,4 +30,12 @@ export class Task {
     public getUpdatedAt() {
         return this.updatedAt;
     }
+    public setCompleted() {
+        this.completed = !this.completed;
+        this.updatedAt = new Date();
+    }
+    public setText(text: string) {
+        this.text = text;
+        this.updatedAt = new Date();
+    }
 }

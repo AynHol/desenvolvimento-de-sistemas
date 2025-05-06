@@ -5,6 +5,7 @@ const app = fastify();
 
 app.register(taskController);
 
-app.listen({ port: 5505 }).then(() => {
+const PORT = 5505;
+app.listen({ port: PORT }).then(() => {
     console.log("Backend running in port 5505!");
 });
