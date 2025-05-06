@@ -9,6 +9,7 @@
 - Semana 06 - React.
 - Semana 07 - Continuação React. (incluso na 06).
 - Semana 08 - Continuação React. (incluso na 06).
-- Semana 10 - Teste de sistemas
-- Semana 12 - React revisão
-- Semana 13 - Back-End
+- Semana 10 - Teste de sistemas.
+- Semana 12 - React revisão.
+- Semana 13 - Back-End.
+- Semana 14 - Continuação do Back-End. (incluso na 13).
