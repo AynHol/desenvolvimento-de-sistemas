@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { taskService } from "../service/TaskService";
+import { request } from "http";
 
 export async function taskController(app: FastifyInstance) {
     app.post("/task", (request, reply) => {
@@ -36,12 +37,22 @@ export async function taskController(app: FastifyInstance) {
         }
     });
 
-    app.patch("/task/:id/text", (request: FastifyRequest, reply: FastifyReply) => {
+    app.patch("/tasks/:id/text", (request: FastifyRequest, reply: FastifyReply) => {
         const { id } = request.params as { id: string };
         const { text } = request.body as { text: string };
         try {
             const task = taskService.updateText(id, text);
             return reply.code(200).send(task);
+        } catch (error: any) {
+            return reply.code(404).send({ error: error.messsage });
+        }
+    });
+
+    app.delete("/tasks/:id", (request: FastifyRequest, reply: FastifyReply) => {
+        const { id } = request.params as { id: string };
+        try {
+            taskService.delete(id);
+            return reply.code(200).send();
         } catch (error: any) {
             return reply.code(404).send({ error: error.messsage });
         }
