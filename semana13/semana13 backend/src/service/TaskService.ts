@@ -1,22 +1,23 @@
 import { Task } from "../entity/Task";
-import { TaskRepository } from "../repository/TaskRepository";
+// import { TaskRepository } from "../repository/TaskRepository";
 
 class TaskService {
     private taskList: Task[] = [];
-    private taskRepository = new TaskRepository();
+    // private taskRepository = new TaskRepository();
 
     public create(text: string): void {
-        // const textAlreadyExist = this.taskList.find((task) => task.getText() === text);
-        // if (textAlreadyExist) {
-        //     throw new Error("There is already a task with this text.");
-        // }
+        const textAlreadyExist = this.taskList.find((task) => task.getText() === text);
+        if (textAlreadyExist) {
+            throw new Error("There is already a task with this text.");
+        }
         const newTask = new Task(text);
         // this.taskRepository.save(newTask);
+        this.taskList.push(newTask);
     }
 
     public async getAll() {
-        const task = await this.taskRepository.findAll();
-        return task;
+        // const task = await this.taskRepository.findAll();
+        return this.taskList;
     }
 
     public getById(id: string): Task | null {
@@ -48,13 +49,8 @@ class TaskService {
         return task;
     }
 
-    public delete(id: string) {
-        const task = this.getById(id);
-        if (task === null) {
-            throw new Error("Task not found.");
-        }
-        const taskFilter = this.taskList.filter((task) => task.getId() !== id);
-        this.taskList = taskFilter;
+    public deleteTask(id: string) {
+        this.taskList = this.taskList.filter((task) => task.getId() !== id);
     }
 }
 

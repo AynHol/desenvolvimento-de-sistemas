@@ -1,6 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { taskService } from "../service/TaskService";
-import { request } from "http";
 
 export async function taskController(app: FastifyInstance) {
     app.post("/task", (request, reply) => {
@@ -16,18 +15,18 @@ export async function taskController(app: FastifyInstance) {
         }
     });
 
-    app.get("/tasks", (_, reply) => {
+    app.get("/task", (_, reply) => {
         const list = taskService.getAll();
         return reply.code(200).send(list);
     });
 
-    app.get("/tasks/:id", (request: FastifyRequest, reply: FastifyReply) => {
+    app.get("/task/:id", (request: FastifyRequest, reply: FastifyReply) => {
         const { id } = request.params as { id: string };
         const tasks = taskService.getById(id);
         return reply.code(200).send(tasks);
     });
 
-    app.patch("/tasks/:id/completed", (request: FastifyRequest, reply: FastifyReply) => {
+    app.patch("/task/:id/completed", (request: FastifyRequest, reply: FastifyReply) => {
         const { id } = request.params as { id: string };
         try {
             const task = taskService.updateCompleted(id);
@@ -37,7 +36,7 @@ export async function taskController(app: FastifyInstance) {
         }
     });
 
-    app.patch("/tasks/:id/text", (request: FastifyRequest, reply: FastifyReply) => {
+    app.patch("/task/:id/text", (request: FastifyRequest, reply: FastifyReply) => {
         const { id } = request.params as { id: string };
         const { text } = request.body as { text: string };
         try {
@@ -48,13 +47,9 @@ export async function taskController(app: FastifyInstance) {
         }
     });
 
-    app.delete("/tasks/:id", (request: FastifyRequest, reply: FastifyReply) => {
+    app.delete("/task/:id", (request: FastifyRequest, reply: FastifyReply) => {
         const { id } = request.params as { id: string };
-        try {
-            taskService.delete(id);
-            return reply.code(200).send();
-        } catch (error: any) {
-            return reply.code(404).send({ error: error.messsage });
-        }
+        taskService.deleteTask(id);
+        return reply.code(200).send();
     });
 }
