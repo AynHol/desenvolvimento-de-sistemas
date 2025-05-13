@@ -13,3 +13,4 @@
 - Semana 12 - React revisão.
 - Semana 13 - Back-End.
 - Semana 14 - Continuação do Back-End. (incluso na 13).
+- Semana 15 - Autenticação e Login no Back-End. (incluso na 13).
