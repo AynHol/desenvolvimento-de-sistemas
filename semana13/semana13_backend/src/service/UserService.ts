@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 import { prisma } from "../prisma/client";
 import { compare, hash } from "bcryptjs";
+import { FastifyInstance } from "fastify";
 
 class UserService {
     public async register({ name, email, password, birthDate }: CreateUserType): Promise<void> {
@@ -23,7 +24,7 @@ class UserService {
         await prisma.user.create({ data: user });
     }
 
-    public async login({ email, password }: LoginType): Promise<string | null> {
+    public async login({ email, password }: LoginType, app: FastifyInstance): Promise<string | null> {
         const user = await prisma.user.findUnique({ where: { email: email } });
         if (!user) {
             throw new Error("Invalid Credentials ");
@@ -39,6 +40,8 @@ class UserService {
             name: user.name,
             email: user.email,
             birthDate: user.birthDate,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
         });
     }
 }
