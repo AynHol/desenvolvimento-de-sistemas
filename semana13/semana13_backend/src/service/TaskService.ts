@@ -1,21 +1,24 @@
-import { Task as PTASK } from "@prisma/client";
+import { Task } from "@prisma/client";
 import { prisma } from "../prisma/client";
 
 class TaskService {
-
-    public async create(text: string): Promise<void> {
-        const task: PTASK = {
+    public async create(text: string, userId: string): Promise<void> {
+        const task: Task = {
             id: crypto.randomUUID(),
-            text: text,
+            text,
             completed: false,
+            userId,
             createdAt: new Date(),
             updatedAr: new Date(),
         };
         await prisma.task.create({ data: task });
     }
 
-    public async getAll(): Promise<PTASK[]> {
-        return await prisma.task.findMany();
+    public async getAll(userId: string): Promise<Task[]> {
+        return await prisma.task.findMany({
+            orderBy: { createdAt: "desc" },
+            where: { userId },
+        });
     }
 
     public async updateCompleted(id: string) {

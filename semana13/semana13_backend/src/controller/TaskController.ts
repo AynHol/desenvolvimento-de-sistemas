@@ -1,25 +1,26 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { taskService } from "../service/TaskService";
 import { geralTaskSchema, taskSchema } from "../config/schema/task.schema";
+import { User } from "@prisma/client";
 
 export async function taskController(app: FastifyInstance) {
     app.addHook("onRequest", app.authenticate);
 
-    app.post("/task", { schema: taskSchema }, async (request, reply) => {
-        // Pegar informação do front ou de quem chamar o endpoint (text)
+    app.post("/task", { schema: taskSchema }, async (request: FastifyRequest, reply: FastifyReply) => {
         const body = request.body as { text: string };
+        const { id } = request.user as User;
 
-        // Retorna code 201 ou envia erro se achar erro
         try {
-            await taskService.create(body.text);
+            await taskService.create(body.text, id);
             return reply.code(201).send();
         } catch (error: any) {
             return reply.code(409).send({ error: error.messsage });
         }
     });
 
-    app.get("/task", { schema: geralTaskSchema }, async (_, reply) => {
-        const list = await taskService.getAll();
+    app.get("/task", { schema: geralTaskSchema }, async (request: FastifyRequest, reply: FastifyReply) => {
+        const { id } = request.user as User;
+        const list = await taskService.getAll(id);
         return reply.code(200).send(list);
     });
 

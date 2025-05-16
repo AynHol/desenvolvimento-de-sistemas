@@ -27,12 +27,12 @@ class UserService {
     public async login({ email, password }: LoginType, app: FastifyInstance): Promise<string | null> {
         const user = await prisma.user.findUnique({ where: { email: email } });
         if (!user) {
-            throw new Error("Invalid Credentials ");
+            throw new Error("Invalid Credentials");
         }
 
         const passwordIsValid = await compare(password, user.password);
         if (!passwordIsValid) {
-            throw new Error("Invalid Credentials ");
+            throw new Error("Invalid Credentials");
         }
 
         return app.jwt.sign({
