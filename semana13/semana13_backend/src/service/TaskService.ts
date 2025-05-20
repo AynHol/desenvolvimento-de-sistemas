@@ -15,10 +15,29 @@ class TaskService {
     }
 
     public async getAll(userId: string): Promise<Task[]> {
-        return await prisma.task.findMany({
+        const tasks = await prisma.task.findMany({
             orderBy: { createdAt: "desc" },
             where: { userId },
+            include: {
+                TaskTag: {
+                    include: {
+                        tag: true,
+                    },
+                },
+            },
         });
+
+        const tasksMap = tasks.map(
+            (task) =>
+                ({
+                    id: task.id,
+                    text: task.text,
+                    completed: task.completed,
+                    userId: task.userId,
+                    tags: task.TaskTag.map((relation) => ({ tag: relation.tag.name, id: relation.tag.id })),
+                } as any)
+        );
+        return tasksMap;
     }
 
     public async updateCompleted(id: string) {

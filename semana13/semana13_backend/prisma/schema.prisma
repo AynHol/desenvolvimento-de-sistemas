@@ -8,24 +8,36 @@ datasource db {
 }
 
 model Task {
-  id        String   @id
+  id        String    @id
   text      String
   completed Boolean
   createdAt DateTime
-  updatedAr DateTime @updatedAt
+  updatedAr DateTime  @updatedAt
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+  TaskTag   TaskTag[]
 
   @@map("tasks")
 }
 
 model Tag {
-  id        String   @id
-  name      String   @unique
+  id        String    @id
+  name      String    @unique
   createdAt DateTime
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime  @updatedAt
+  TaskTag   TaskTag[]
 
   @@map("tags")
+}
+
+model TaskTag {
+  taskId String
+  tagId  String
+  task   Task   @relation(fields: [taskId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([taskId, tagId])
+  @@map("task_tags")
 }
 
 model User {
